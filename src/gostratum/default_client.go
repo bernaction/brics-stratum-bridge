@@ -140,18 +140,18 @@ func SendExtranonce(ctx *StratumContext) {
 	}
 }
 
-var walletRegex = regexp.MustCompile("kaspa:[a-z0-9]+")
+var walletRegex = regexp.MustCompile("brics:[a-z0-9]+")
 
 func CleanWallet(in string) (string, error) {
 	_, err := util.DecodeAddress(in, util.Bech32PrefixKaspa)
 	if err == nil {
 		return in, nil // good to go
 	}
-	if !strings.HasPrefix(in, "kaspa:") {
-		return CleanWallet("kaspa:" + in)
+	if !strings.HasPrefix(in, "brics:") {
+		return CleanWallet("brics:" + in)
 	}
 
-	// has kaspa: prefix but other weirdness somewhere
+	// has brics: prefix but other weirdness somewhere
 	if walletRegex.MatchString(in) {
 		return in[0:67], nil
 	}

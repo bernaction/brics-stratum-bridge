@@ -109,7 +109,7 @@ func (c *clientListener) NewBlockAvailable(kapi *KaspaApi) {
 					client.Disconnect() // unrecoverable
 				} else {
 					RecordWorkerError(client.WalletAddr, ErrFailedBlockFetch)
-					client.Logger.Error(fmt.Sprintf("failed fetching new block template from kaspa: %s", err))
+					client.Logger.Error(fmt.Sprintf("failed fetching new block template from brics: %s", err))
 				}
 				return
 			}
