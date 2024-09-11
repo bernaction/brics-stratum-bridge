@@ -1,16 +1,16 @@
 services:
-  ks_bridge:
+  brics_bridge:
     build:
       context: .
       no_cache: true
-    container_name: ks_bridge
+    container_name: brics_bridge
     restart: unless-stopped
     user: "0"
     command:
       - '-stats=false'
-      - '-kaspa=host.docker.internal:16110'
+      - '-kaspa=host.docker.internal:18110'
     ports:
-      - 5555:5555
+      - 18220:18220
       - 2114:2114
     extra_hosts:
       - host.docker.internal:host-gateway
