@@ -1,4 +1,4 @@
-# Kaspa Stratum Adapter
+# Brics Stratum Adapter
 
 This is a lightweight daemon that allows mining to a local (or remote) kaspa node using stratum-base miners.
 
@@ -33,7 +33,7 @@ Tips appreciated:
  pc             |     758.97MH/s |       1017/0/0 |            0 |      52m54s
 -------------------------------------------------------------------------------
                 |      44.12GH/s |       2200/0/0 |            1 |      53m20s
-========================================================== ks_bridge_v1.1.7 ===
+========================================================== brics_bridge_v1.1.7 ===
 ```
 
 
