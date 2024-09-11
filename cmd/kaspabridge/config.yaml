@@ -3,11 +3,11 @@
 # Note `:PORT` format is needed if not specifiying a specific ip range 
 stratum_port: :18220
 
-# bricsd_address: address/port of the rpc server for bricsd, typically 16110
+# kaspad_address: address/port of the rpc server for bricsd, typically 16110
 # For a list of public nodes, run `nslookup mainnet-dnsseed.daglabs-dev.com` 
 # uncomment for to use a public node
-# bricsd_address: 46.17.104.200:16110
-bricsd_address: localhost:18110
+# kaspad_address: 46.17.104.200:16110
+kaspad_address: localhost:18110
 
 # min_share_diff: only accept shares of the specified difficulty (or higher) 
 # from the miner(s).  Higher values will reduce the number of shares submitted, 

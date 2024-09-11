@@ -51,12 +51,12 @@ func (ks *KaspaApi) startStatsThread(ctx context.Context) {
 		case <-ticker.C:
 			dagResponse, err := ks.kaspad.GetBlockDAGInfo()
 			if err != nil {
-				ks.logger.Warn("failed to get network hashrate from brics, prom stats will be out of date", zap.Error(err))
+				ks.logger.Warn("failed to get network hashrate from bricsd, prom stats will be out of date", zap.Error(err))
 				continue
 			}
 			response, err := ks.kaspad.EstimateNetworkHashesPerSecond(dagResponse.TipHashes[0], 1000)
 			if err != nil {
-				ks.logger.Warn("failed to get network hashrate from brics, prom stats will be out of date", zap.Error(err))
+				ks.logger.Warn("failed to get network hashrate from bricsd, prom stats will be out of date", zap.Error(err))
 				continue
 			}
 			RecordNetworkStats(response.NetworkHashesPerSecond, dagResponse.BlockCount, dagResponse.Difficulty)
@@ -84,7 +84,7 @@ func (s *KaspaApi) waitForSync(verbose bool) error {
 	for {
 		clientInfo, err := s.kaspad.GetInfo()
 		if err != nil {
-			return errors.Wrapf(err, "error fetching server info from kaspad @ %s", s.address)
+			return errors.Wrapf(err, "error fetching server info from bricsd @ %s", s.address)
 		}
 		if clientInfo.IsSynced {
 			break
@@ -104,9 +104,9 @@ func (s *KaspaApi) startBlockTemplateListener(ctx context.Context, blockReadyCb 
 	ticker := time.NewTicker(s.blockWaitTime)
 	for {
 		if err := s.waitForSync(false); err != nil {
-			s.logger.Error("error checking kaspad sync state, attempting reconnect: ", err)
+			s.logger.Error("error checking bricsd sync state, attempting reconnect: ", err)
 			if err := s.reconnect(); err != nil {
-				s.logger.Error("error reconnecting to kaspad, waiting before retry: ", err)
+				s.logger.Error("error reconnecting to bricsd, waiting before retry: ", err)
 				time.Sleep(5 * time.Second)
 			}
 			restartChannel = true

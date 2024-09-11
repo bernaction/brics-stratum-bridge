@@ -39,7 +39,7 @@ func DefaultConfig(logger *zap.Logger) StratumListenerConfig {
 	return StratumListenerConfig{
 		StateGenerator: func() any { return nil },
 		HandlerMap:     DefaultHandlers(),
-		Port:           ":5555",
+		Port:           ":18220",
 		Logger:         logger,
 	}
 }
@@ -155,5 +155,5 @@ func CleanWallet(in string) (string, error) {
 	if walletRegex.MatchString(in) {
 		return in[0:67], nil
 	}
-	return "", errors.New("unable to coerce wallet to valid kaspa address")
+	return "", errors.New("unable to coerce wallet to valid brics address")
 }

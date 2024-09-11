@@ -18,62 +18,62 @@ var workerLabels = []string{
 }
 
 var shareCounter = promauto.NewCounterVec(prometheus.CounterOpts{
-	Name: "ks_valid_share_counter",
+	Name: "brics_valid_share_counter",
 	Help: "Number of shares found by worker over time",
 }, workerLabels)
 
 var shareDiffCounter = promauto.NewCounterVec(prometheus.CounterOpts{
-	Name: "ks_valid_share_diff_counter",
+	Name: "brics_valid_share_diff_counter",
 	Help: "Total difficulty of shares found by worker over time",
 }, workerLabels)
 
 var invalidCounter = promauto.NewCounterVec(prometheus.CounterOpts{
-	Name: "ks_invalid_share_counter",
+	Name: "brics_invalid_share_counter",
 	Help: "Number of stale shares found by worker over time",
 }, append(workerLabels, "type"))
 
 var blockCounter = promauto.NewCounterVec(prometheus.CounterOpts{
-	Name: "ks_blocks_mined",
+	Name: "brics_blocks_mined",
 	Help: "Number of blocks mined over time",
 }, workerLabels)
 
 var blockGauge = promauto.NewGaugeVec(prometheus.GaugeOpts{
-	Name: "ks_mined_blocks_gauge",
+	Name: "brics_mined_blocks_gauge",
 	Help: "Gauge containing 1 unique instance per block mined",
 }, append(workerLabels, "nonce", "bluescore", "hash"))
 
 var disconnectCounter = promauto.NewCounterVec(prometheus.CounterOpts{
-	Name: "ks_worker_disconnect_counter",
+	Name: "brics_worker_disconnect_counter",
 	Help: "Number of disconnects by worker",
 }, workerLabels)
 
 var jobCounter = promauto.NewCounterVec(prometheus.CounterOpts{
-	Name: "ks_worker_job_counter",
+	Name: "brics_worker_job_counter",
 	Help: "Number of jobs sent to the miner by worker over time",
 }, workerLabels)
 
 var balanceGauge = promauto.NewGaugeVec(prometheus.GaugeOpts{
-	Name: "ks_balance_by_wallet_gauge",
+	Name: "brics_balance_by_wallet_gauge",
 	Help: "Gauge representing the wallet balance for connected workers",
 }, []string{"wallet"})
 
 var errorByWallet = promauto.NewCounterVec(prometheus.CounterOpts{
-	Name: "ks_worker_errors",
+	Name: "brics_worker_errors",
 	Help: "Gauge representing errors by worker",
 }, []string{"wallet", "error"})
 
 var estimatedNetworkHashrate = promauto.NewGauge(prometheus.GaugeOpts{
-	Name: "ks_estimated_network_hashrate_gauge",
+	Name: "brics_estimated_network_hashrate_gauge",
 	Help: "Gauge representing the estimated network hashrate",
 })
 
 var networkDifficulty = promauto.NewGauge(prometheus.GaugeOpts{
-	Name: "ks_network_difficulty_gauge",
+	Name: "brics_network_difficulty_gauge",
 	Help: "Gauge representing the network difficulty",
 })
 
 var networkBlockCount = promauto.NewGauge(prometheus.GaugeOpts{
-	Name: "ks_network_block_count",
+	Name: "brics_network_block_count",
 	Help: "Gauge representing the network block count",
 })
 

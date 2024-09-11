@@ -179,7 +179,7 @@ func (c *clientListener) NewBlockAvailable(kapi *KaspaApi) {
 			go func() {
 				balances, err := kapi.kaspad.GetBalancesByAddresses(addresses)
 				if err != nil {
-					c.logger.Warn("failed to get balances from kaspa, prom stats will be out of date", zap.Error(err))
+					c.logger.Warn("failed to get balances from brics, prom stats will be out of date", zap.Error(err))
 					return
 				}
 				RecordBalances(balances)
