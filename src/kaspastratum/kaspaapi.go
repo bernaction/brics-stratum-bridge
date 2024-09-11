@@ -29,7 +29,7 @@ func NewKaspaAPI(address string, blockWaitTime time.Duration, logger *zap.Sugare
 	return &KaspaApi{
 		address:       address,
 		blockWaitTime: blockWaitTime,
-		logger:        logger.With(zap.String("component", "kaspaapi:"+address)),
+		logger:        logger.With(zap.String("component", "bricsapi:"+address)),
 		kaspad:        client,
 		connected:     true,
 	}, nil
@@ -51,12 +51,12 @@ func (ks *KaspaApi) startStatsThread(ctx context.Context) {
 		case <-ticker.C:
 			dagResponse, err := ks.kaspad.GetBlockDAGInfo()
 			if err != nil {
-				ks.logger.Warn("failed to get network hashrate from kaspa, prom stats will be out of date", zap.Error(err))
+				ks.logger.Warn("failed to get network hashrate from brics, prom stats will be out of date", zap.Error(err))
 				continue
 			}
 			response, err := ks.kaspad.EstimateNetworkHashesPerSecond(dagResponse.TipHashes[0], 1000)
 			if err != nil {
-				ks.logger.Warn("failed to get network hashrate from kaspa, prom stats will be out of date", zap.Error(err))
+				ks.logger.Warn("failed to get network hashrate from brics, prom stats will be out of date", zap.Error(err))
 				continue
 			}
 			RecordNetworkStats(response.NetworkHashesPerSecond, dagResponse.BlockCount, dagResponse.Difficulty)
@@ -79,7 +79,7 @@ func (ks *KaspaApi) reconnect() error {
 
 func (s *KaspaApi) waitForSync(verbose bool) error {
 	if verbose {
-		s.logger.Info("checking kaspad sync state")
+		s.logger.Info("checking bricsd sync state")
 	}
 	for {
 		clientInfo, err := s.kaspad.GetInfo()
@@ -89,11 +89,11 @@ func (s *KaspaApi) waitForSync(verbose bool) error {
 		if clientInfo.IsSynced {
 			break
 		}
-		s.logger.Warn("Kaspa is not synced, waiting for sync before starting bridge")
+		s.logger.Warn("Bricsd is not synced, waiting for sync before starting bridge")
 		time.Sleep(5 * time.Second)
 	}
 	if verbose {
-		s.logger.Info("kaspad synced, starting server")
+		s.logger.Info("bricsd synced, starting server")
 	}
 	return nil
 }
