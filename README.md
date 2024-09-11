@@ -33,7 +33,7 @@ Tips appreciated:
  pc             |     758.97MH/s |       1017/0/0 |            0 |      52m54s
 -------------------------------------------------------------------------------
                 |      44.12GH/s |       2200/0/0 |            1 |      53m20s
-========================================================== brics_bridge_v1.1.7 ===
+========================================================== brics_bridge_v1.0.0 ===
 ```
 
 
@@ -237,13 +237,14 @@ IceRiver ASICs require a 2 byte extranonce (extranonce_size=2), an increased min
 
 It is recommended to allow the variable difficulty engine to determine the proper diff setting per client (enabled by default), but if you prefer to set a fixed difficulty, disable vardiff, and consult the following table for the recommended settings for each of the different devices (should produce minimum 20 shares/min):
 
-|ASIC   | Min Diff |
-| ----- | ---- |
-|KS0    |   64 |
-|KS0PRO |  128 |
-|KS1    |  512 |
-|KS2    | 1024 |
-|KS3L/M | 2048 |
-|KS3    | 4096 |
+|ASIC      | Min Diff |
+| -------- | -------- |
+|KS0       |       64 |
+|KS0PRO    |      128 |
+|KS0 Ultra |      256 |
+|KS1       |      512 |
+|KS2       |     1024 |
+|KS3L/M    |     2048 |
+|KS3       |     4096 |
 
 See previous sections for details on setting these parameters for your particular installation.
